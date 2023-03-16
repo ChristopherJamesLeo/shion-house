@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+:root{
+    --global-primary-font : 'Cinzel', serif;
+    --global-secondary-font: 'Poppins', sans-serif;
+    --global-btn-color : #9F78FF;
+    --global-background-color : #1D2547;
+    --global-font-color : #140C40;
+    --global-white-color : #fff;
+    --global-black-color : #000;
+}
