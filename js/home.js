@@ -1,5 +1,15 @@
 // jQuery area start
 $(document).ready(function(){
+    // start modal search box
+    $(".search-btn").click(function(){
+        $(".search_modal_container").toggleClass("active");
+    })
+    $(".search_modal_container").click(function(e){
+        if(!e.target.classList.contains("search_box")){
+            $(".search_modal_container").removeClass("active");
+        }
+    })
+    // end modal search box
     // start heading section
     $(window).scroll(function(){
         var getScrollTop = $(this).scrollTop();
@@ -8,6 +18,30 @@ $(document).ready(function(){
             $("#navbar").addClass("active");
         }else {
             $("#navbar").removeClass("active");
+        }
+
+        console.log(getScrollTop);
+        if(getScrollTop >= 750){
+            $(".product_item").addClass("active");
+        }else {
+            $(".product_item").removeClass("active");
+        }
+
+        if(getScrollTop >= 1600){
+            $(".about_us_section").addClass("active");
+        }else {
+            $(".about_us_section").removeClass("active");
+        }
+
+        if(getScrollTop >= 2100){
+            $(".stablished_content_container").addClass("active");
+        }else {
+            $(".stablished_content_container").removeClass("active");
+        }
+        if(getScrollTop >= 3100){
+            $(".blog_section").addClass("active");
+        }else{
+            $(".blog_section").removeClass("active");
         }
     })
     $("#banner-carousel").owlCarousel({
