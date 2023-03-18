@@ -481,21 +481,21 @@
     font-family: var(--global-primary-font);
     font-weight: 700;
 }
-.content_box form .form-control {
+.content_box form .form-control,.log_in_box form .form-control {
     padding: 10px 20px;
     font-size: 18px;
 }
-.content_box form .form-control::placeholder {
+.content_box form .form-control::placeholder,.log_in_box form .form-control::placeholder {
     color: #ccc;
     font-size: 13px;
     font-weight: 300;
     font-family: var(--global-secondary-font);
 
 }
-.content_box form .form-control:focus {
+.content_box form .form-control:focus,.log_in_box form .form-control:focus  {
     box-shadow: none;
 }
-.content_box form button {
+.content_box form button,.log_in_box form button  {
     padding: 15px 20px;
     color: var(--global-btn-color);
     border: 1px solid var(--global-btn-color);
@@ -525,6 +525,9 @@
 .contact_address h5 + span {
     font-size: 13px;
     font-weight: 400;
+}
+.log_in_box {
+    padding-top: 14px;
 }
 /* End Contact Section */
 
