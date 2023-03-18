@@ -74,13 +74,13 @@ $(document).ready(function(){
         $(this).parent().find(".product_content").toggleClass("active");
         $(this).parent().find(".product_edit_form").toggleClass("active");
     })
-    $(window).click(function(e){
-        if(!e.target.classList.contains("fa-edit")){
-            $(".edit_btn").removeClass("active");
-            $(".product_content").removeClass("active");
-            $(".product_edit_form").removeClass("active");
-        }
-    })
+    // $(window).click(function(e){
+    //     if(!e.target.classList.contains("fa-edit") && !e.target.classList.contains("product_edit_form")){
+    //         $(".edit_btn").removeClass("active");
+    //         $(".product_content").removeClass("active");
+    //         $(".product_edit_form").removeClass("active");
+    //     }
+    // })
     // end product show item section
 })
 

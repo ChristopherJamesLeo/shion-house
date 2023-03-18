@@ -1,3 +1,8 @@
+<?php
+    include "./phpEngine/config.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -173,26 +178,34 @@
         <div class="show_product_container">
             <div class="container show_product_item">
                 <div class="row">
+                    <?php
+                        $sql = "SELECT * FROM products";
+                        $result = mysqli_query( $conn , $sql );
+                        if(mysqli_num_rows($result) > 0) {
+                            while($row = mysqli_fetch_assoc($result)){
+                               # echo $row["id"];
+                    ?>
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="product_item">
                             <div class="edit_btn">
                                 <a href="javascript:void(0)"><i class="fas fa-edit"></i></a>
                             </div>
                             <div class="product_img">
-                                <img src="./asset/img/products/arrival1.png.webp" width="100%" alt="arrival1">
+                                <img src="./asset/img/products/<?php echo $row['img'] ;?>" width="100%" alt="arrival1">
                             </div>
                             <div class="text-center product_content_container">
                                 <div class="product_content">
-                                    <h5>Knitted Jumper</h5>
-                                    <span class="fw-semibold">$ &nbsp;<span>30.00</span></span>
+                                    <h5><?php echo $row["name"]; ?></h5>
+                                    <span class="fw-semibold">$ &nbsp;<span><?php echo $row["price"]; ?></span></span>
                                 </div>
                                 <div class="product_edit_form">
-                                    <form action="" method="post">
+                                    <form action="./phpEngine/edit.php" method="post">
+                                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                                         <div class="form-group mb-2">
-                                            <input type="text" name="product_name" id="product_name" class="form-control rounded-0 border text-center" value="Knitted Jumper" placeholder="Knitted Jumper">
+                                            <input type="text" name="product_name" id="product_name" class="form-control rounded-0 border text-center" value="<?php echo $row['name']; ?>" placeholder="<?php echo $row['name']; ?>">
                                         </div>
                                         <div class="form-group mb-2">
-                                            <input type="text" name="product_price" id="product_price" class="form-control rounded-0 border text-center" value="30" placeholder="30">
+                                            <input type="text" name="product_price" id="product_price" class="form-control rounded-0 border text-center" value="<?php echo $row['price'] ;?>" placeholder="<?php echo $row['price'] ;?>">
                                         </div>
                                         <div class="form_btn_group">
                                             <div class="row">
@@ -203,12 +216,12 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-12 mb-2">
                                                     <div class="d-grid">
-                                                        <a href="#" class="btn btn-success fw-semibold text-uppercase rounded-0 border-0">Submit</a>
+                                                        <button type="submit" class="btn btn-success fw-semibold text-uppercase rounded-0 border-0">Submit</button>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 mb-3">
                                                     <div class="d-grid">
-                                                        <a href="#" class="btn btn-danger fw-semibold text-uppercase rounded-0 border-0">Delete</a>
+                                                        <a href="./phpEngine/delete.php?id=<?php echo $row['id']; ?>" class="btn btn-danger fw-semibold text-uppercase rounded-0 border-0">Delete</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -220,335 +233,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="product_item">
-                            <div class="edit_btn">
-                                <a href="javascript:void(0)"><i class="fas fa-edit"></i></a>
-                            </div>
-                            <div class="product_img">
-                                <img src="./asset/img/products/arrival2.png.webp" width="100%" alt="arrival2">
-                            </div>
-                            <div class="text-center product_content_container">
-                                <div class="product_content">
-                                    <h5>Knitted Jumper</h5>
-                                    <span class="fw-semibold">$ &nbsp;<span>30.00</span></span>
-                                </div>
-                                <div class="product_edit_form">
-                                    <form action="" method="post">
-                                        <div class="form-group mb-2">
-                                            <input type="text" name="product_name" id="product_name" class="form-control rounded-0 border text-center" value="Knitted Jumper" placeholder="Knitted Jumper">
-                                        </div>
-                                        <div class="form-group mb-2">
-                                            <input type="text" name="product_price" id="product_price" class="form-control rounded-0 border text-center" value="30" placeholder="30">
-                                        </div>
-                                        <div class="form_btn_group">
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-12 mb-2">
-                                                    <div class="d-grid">
-                                                        <button type="reset" class="btn btn-warning fw-semibold text-uppercase rounded-0 border-0">Reset</button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-12 mb-2">
-                                                    <div class="d-grid">
-                                                        <a href="#" class="btn btn-success fw-semibold text-uppercase rounded-0 border-0">Submit</a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <div class="d-grid">
-                                                        <a href="#" class="btn btn-danger fw-semibold text-uppercase rounded-0 border-0">Delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </form>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="product_item">
-                            <div class="edit_btn">
-                                <a href="javascript:void(0)"><i class="fas fa-edit"></i></a>
-                            </div>
-                            <div class="product_img">
-                                <img src="./asset/img/products/arrival3.png.webp" width="100%" alt="arrival3">
-                            </div>
-                            <div class="text-center product_content_container">
-                                <div class="product_content">
-                                    <h5>Knitted Jumper</h5>
-                                    <span class="fw-semibold">$ &nbsp;<span>30.00</span></span>
-                                </div>
-                                <div class="product_edit_form">
-                                    <form action="" method="post">
-                                        <div class="form-group mb-2">
-                                            <input type="text" name="product_name" id="product_name" class="form-control rounded-0 border text-center" value="Knitted Jumper" placeholder="Knitted Jumper">
-                                        </div>
-                                        <div class="form-group mb-2">
-                                            <input type="text" name="product_price" id="product_price" class="form-control rounded-0 border text-center" value="30" placeholder="30">
-                                        </div>
-                                        <div class="form_btn_group">
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-12 mb-2">
-                                                    <div class="d-grid">
-                                                        <button type="reset" class="btn btn-warning fw-semibold text-uppercase rounded-0 border-0">Reset</button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-12 mb-2">
-                                                    <div class="d-grid">
-                                                        <a href="#" class="btn btn-success fw-semibold text-uppercase rounded-0 border-0">Submit</a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <div class="d-grid">
-                                                        <a href="#" class="btn btn-danger fw-semibold text-uppercase rounded-0 border-0">Delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </form>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="product_item">
-                            <div class="edit_btn">
-                                <a href="javascript:void(0)"><i class="fas fa-edit"></i></a>
-                            </div>
-                            <div class="product_img">
-                                <img src="./asset/img/products/arrival4.png.webp" width="100%" alt="arrival4">
-                            </div>
-                            <div class="text-center product_content_container">
-                                <div class="product_content">
-                                    <h5>Knitted Jumper</h5>
-                                    <span class="fw-semibold">$ &nbsp;<span>30.00</span></span>
-                                </div>
-                                <div class="product_edit_form">
-                                    <form action="" method="post">
-                                        <div class="form-group mb-2">
-                                            <input type="text" name="product_name" id="product_name" class="form-control rounded-0 border text-center" value="Knitted Jumper" placeholder="Knitted Jumper">
-                                        </div>
-                                        <div class="form-group mb-2">
-                                            <input type="text" name="product_price" id="product_price" class="form-control rounded-0 border text-center" value="30" placeholder="30">
-                                        </div>
-                                        <div class="form_btn_group">
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-12 mb-2">
-                                                    <div class="d-grid">
-                                                        <button type="reset" class="btn btn-warning fw-semibold text-uppercase rounded-0 border-0">Reset</button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-12 mb-2">
-                                                    <div class="d-grid">
-                                                        <a href="#" class="btn btn-success fw-semibold text-uppercase rounded-0 border-0">Submit</a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <div class="d-grid">
-                                                        <a href="#" class="btn btn-danger fw-semibold text-uppercase rounded-0 border-0">Delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </form>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="product_item">
-                            <div class="edit_btn">
-                                <a href="javascript:void(0)"><i class="fas fa-edit"></i></a>
-                            </div>
-                            <div class="product_img">
-                                <img src="./asset/img/products/arrival5.png.webp" width="100%" alt="arrival5">
-                            </div>
-                            <div class="text-center product_content_container">
-                                <div class="product_content">
-                                    <h5>Knitted Jumper</h5>
-                                    <span class="fw-semibold">$ &nbsp;<span>30.00</span></span>
-                                </div>
-                                <div class="product_edit_form">
-                                    <form action="" method="post">
-                                        <div class="form-group mb-2">
-                                            <input type="text" name="product_name" id="product_name" class="form-control rounded-0 border text-center" value="Knitted Jumper" placeholder="Knitted Jumper">
-                                        </div>
-                                        <div class="form-group mb-2">
-                                            <input type="text" name="product_price" id="product_price" class="form-control rounded-0 border text-center" value="30" placeholder="30">
-                                        </div>
-                                        <div class="form_btn_group">
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-12 mb-2">
-                                                    <div class="d-grid">
-                                                        <button type="reset" class="btn btn-warning fw-semibold text-uppercase rounded-0 border-0">Reset</button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-12 mb-2">
-                                                    <div class="d-grid">
-                                                        <a href="#" class="btn btn-success fw-semibold text-uppercase rounded-0 border-0">Submit</a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <div class="d-grid">
-                                                        <a href="#" class="btn btn-danger fw-semibold text-uppercase rounded-0 border-0">Delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </form>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="product_item">
-                            <div class="edit_btn">
-                                <a href="javascript:void(0)"><i class="fas fa-edit"></i></a>
-                            </div>
-                            <div class="product_img">
-                                <img src="./asset/img/products/arrival6.png.webp" width="100%" alt="arrival6">
-                            </div>
-                            <div class="text-center product_content_container">
-                                <div class="product_content">
-                                    <h5>Knitted Jumper</h5>
-                                    <span class="fw-semibold">$ &nbsp;<span>30.00</span></span>
-                                </div>
-                                <div class="product_edit_form">
-                                    <form action="" method="post">
-                                        <div class="form-group mb-2">
-                                            <input type="text" name="product_name" id="product_name" class="form-control rounded-0 border text-center" value="Knitted Jumper" placeholder="Knitted Jumper">
-                                        </div>
-                                        <div class="form-group mb-2">
-                                            <input type="text" name="product_price" id="product_price" class="form-control rounded-0 border text-center" value="30" placeholder="30">
-                                        </div>
-                                        <div class="form_btn_group">
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-12 mb-2">
-                                                    <div class="d-grid">
-                                                        <button type="reset" class="btn btn-warning fw-semibold text-uppercase rounded-0 border-0">Reset</button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-12 mb-2">
-                                                    <div class="d-grid">
-                                                        <a href="#" class="btn btn-success fw-semibold text-uppercase rounded-0 border-0">Submit</a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <div class="d-grid">
-                                                        <a href="#" class="btn btn-danger fw-semibold text-uppercase rounded-0 border-0">Delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </form>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="product_item">
-                            <div class="edit_btn">
-                                <a href="javascript:void(0)"><i class="fas fa-edit"></i></a>
-                            </div>
-                            <div class="product_img">
-                                <img src="./asset/img/products/arrival7.png.webp" width="100%" alt="arrival7">
-                            </div>
-                            <div class="text-center product_content_container">
-                                <div class="product_content">
-                                    <h5>Knitted Jumper</h5>
-                                    <span class="fw-semibold">$ &nbsp;<span>30.00</span></span>
-                                </div>
-                                <div class="product_edit_form">
-                                    <form action="" method="post">
-                                        <div class="form-group mb-2">
-                                            <input type="text" name="product_name" id="product_name" class="form-control rounded-0 border text-center" value="Knitted Jumper" placeholder="Knitted Jumper">
-                                        </div>
-                                        <div class="form-group mb-2">
-                                            <input type="text" name="product_price" id="product_price" class="form-control rounded-0 border text-center" value="30" placeholder="30">
-                                        </div>
-                                        <div class="form_btn_group">
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-12 mb-2">
-                                                    <div class="d-grid">
-                                                        <button type="reset" class="btn btn-warning fw-semibold text-uppercase rounded-0 border-0">Reset</button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-12 mb-2">
-                                                    <div class="d-grid">
-                                                        <a href="#" class="btn btn-success fw-semibold text-uppercase rounded-0 border-0">Submit</a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <div class="d-grid">
-                                                        <a href="#" class="btn btn-danger fw-semibold text-uppercase rounded-0 border-0">Delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </form>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="product_item">
-                            <div class="edit_btn">
-                                <a href="javascript:void(0)"><i class="fas fa-edit"></i></a>
-                            </div>
-                            <div class="product_img">
-                                <img src="./asset/img/products/arrival8.png.webp" width="100%" alt="arrival8">
-                            </div>
-                            <div class="text-center product_content_container">
-                                <div class="product_content">
-                                    <h5>Knitted Jumper</h5>
-                                    <span class="fw-semibold">$ &nbsp;<span>30.00</span></span>
-                                </div>
-                                <div class="product_edit_form">
-                                    <form action="" method="post">
-                                        <div class="form-group mb-2">
-                                            <input type="text" name="product_name" id="product_name" class="form-control rounded-0 border text-center" value="Knitted Jumper" placeholder="Knitted Jumper">
-                                        </div>
-                                        <div class="form-group mb-2">
-                                            <input type="text" name="product_price" id="product_price" class="form-control rounded-0 border text-center" value="30" placeholder="30">
-                                        </div>
-                                        <div class="form_btn_group">
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-12 mb-2">
-                                                    <div class="d-grid">
-                                                        <button type="reset" class="btn btn-warning fw-semibold text-uppercase rounded-0 border-0">Reset</button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-12 mb-2">
-                                                    <div class="d-grid">
-                                                        <a href="#" class="btn btn-success fw-semibold text-uppercase rounded-0 border-0">Submit</a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <div class="d-grid">
-                                                        <a href="#" class="btn btn-danger fw-semibold text-uppercase rounded-0 border-0">Delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </form>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                            }
+                        }
+                    ?>
                 </div>
             </div>
         </div>
@@ -728,7 +416,7 @@
                                 </div>
                                 <div class=" log_in_box">
                                     <h3 class="mb-4">Log In</h3>
-                                    <form action="" method="">
+                                    <form action="<?php $_SERVER["PHP_SELF"] ?>" method="post">
                                         <div class="row">
                                             <div class="col-lg-12 col-mb-12 mb-4 form-group">
                                                 <input type="email" name="email" id="email" class="form-control rounded-0 border" placeholder="Enter Your Email">
@@ -743,6 +431,13 @@
                                             </div>
                                         </div>
                                     </form>
+                                    <?php
+
+                                        
+
+
+
+                                    ?>
                                 </div>
                             </div>
                         </div>
