@@ -495,7 +495,7 @@
 .content_box form .form-control:focus,.log_in_box form .form-control:focus  {
     box-shadow: none;
 }
-.content_box form button,.log_in_box form button  {
+.content_box form button,.log_in_box form button ,.log_out_box a {
     padding: 15px 20px;
     color: var(--global-btn-color);
     border: 1px solid var(--global-btn-color);
@@ -503,7 +503,7 @@
     font-weight: 400;
 
 }
-.content_box form button:hover,.content_box form button:focus {
+.content_box form button:hover,.content_box form button:focus,.log_out_box a:hover ,.log_out_box a:focus {
     color: var(--global-white-color);
     background-color: var(--global-btn-color);
     border: 1px solid var(--global-btn-color);
