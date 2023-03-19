@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS products (
     name CHAR(100) NOT NULL DEFAULT "Product Name",
     type CHAR(100) NOT NULL DEFAULT "type",
     price DOUBLE(5,2) ,
-    img BLOB ,
+    img BLOB NOT NULL ,
     create_at TIMESTAMP DEFAULT NOW() ,
     update_at TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP,
 )
@@ -26,14 +26,14 @@ CREATE TABLE IF NOT EXISTS users(
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     role CHAR(100) NOT NULL,
+    img BLOB NOT NULL,
     address VARCHAR(255) NULL,
     contactno VARCHAR(255) NOT NULL DEFAULT "123456789",
     create_at TIMESTAMP DEFAULT NOW()
 )
-INSERT INTO users (name,email,password,role,address,contactno) VALUES
-("james leo","james@gmail.com","11111","1","Oaktharmyothit","0912312422"),
-("aung aung","aung@gmail.com","22222","0","Maharmying","0998765432"),
-("hla hla","hlahla@gmail.com","33333","1","pinsi","09872868342");
+INSERT INTO users (name,email,password,role,img,address,contactno) VALUES
+("james","james@gmail.com","11111","1","user2.jpg","sarilanka","0912312422"),
+("vivian","vivian@gmail.com","22222","0","agent-2.jpg","singapore","09872868342");
 
 
 CREATE TABLE IF NOT EXISTS messages(

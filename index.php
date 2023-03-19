@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include "./phpEngine/config.php";
 
 ?>
@@ -62,6 +63,21 @@
                         <li><a href="#"><i class="fab fa-twitter"></i></a></li>
                         <li><a href="#"><i class="fab fa-youtube"></i></a></li>
                         <li><a href="javascript:void(0)" class="search-btn"><i class="fas fa-search"></i></a></li>
+                        <?php
+                            if(isset($_SESSION["id"])){
+                                $userImg = "SELECT img FROM users WHERE id = {$_SESSION['id']}";
+                                $resultImg = mysqli_query($conn , $userImg);
+                                if(mysqli_num_rows($resultImg) > 0){
+                                    while($userImgRow = mysqli_fetch_assoc($resultImg)){
+                        ?>
+                            <li><a href="javascript:void(0)" class="ovarflow-hidden"><img src="./asset/img/avators/<?php echo $userImgRow["img"]  ?>" class="rounded-circle " width="35px" height="35px" alt=""></a></li>
+                        <?php
+                                    }
+                                }
+                            }
+
+                        ?>
+
                     </ul>
                 </div>
             </div>
@@ -187,9 +203,23 @@
                     ?>
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="product_item">
-                            <div class="edit_btn">
-                                <a href="javascript:void(0)"><i class="fas fa-edit"></i></a>
-                            </div>
+                            <?php
+                            
+                                if(isset($_SESSION["id"])){
+                                    if($_SESSION["role"] === "1"){
+                            ?>
+                                        <div class="edit_btn">
+                                            <a href="javascript:void(0)"><i class="fas fa-edit"></i></a>
+                                        </div>
+                            <?php
+                                    }else {
+                            ?>
+                                        <div></div>
+                            <?php
+                                    }
+                                }
+                            ?>
+                            
                             <div class="product_img">
                                 <img src="./asset/img/products/<?php echo $row['img'] ;?>" width="100%" alt="arrival1">
                             </div>
@@ -368,7 +398,7 @@
                     <div class="mt-5 content_box">
                         <div class="row">
                             <div class="col-lg-8 col-md-12 mb-4">
-                                <form action="" method="">
+                                <form action="./phpEngine/messageadd.php" method="post">
                                     <div class="row">
                                         <div class="col-12 mb-4 form-group">
                                             <textarea name="message" id="message" cols="30" rows="10" class="form-control rounded-0 border" placeholder="Enter Message"></textarea>
@@ -380,7 +410,7 @@
                                             <input type="email" name="email" id="email" class="form-control rounded-0 border" placeholder="Enter Your email">
                                         </div>
                                         <div class="col-lg-12 mb-4 form-group">
-                                            <input type="text" name="text" id="text" class="form-control rounded-0 border" placeholder="Enter Subject">
+                                            <input type="text" name="subject" id="subject" class="form-control rounded-0 border" placeholder="Enter Subject">
                                         </div>
                                         <div class="col-lg-2 col-md-12">
                                             <div class="d-grid">
@@ -414,9 +444,24 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php
+                                if(isset($_SESSION["id"])){
+                                ?>
+                                    <div class=" log_out_box">
+                                         <div class="col-12">
+                                             <div class="d-grid">
+                                                 <a href="./phpEngine/logout.php" class="btn  rounded-0">Log Out</a>
+                                             </div>
+                                         </div>
+                                    </div>
+                                        
+                                <?php
+                                    }else{
+                                ?>
                                 <div class=" log_in_box">
                                     <h3 class="mb-4">Log In</h3>
                                     <form action="<?php $_SERVER["PHP_SELF"] ?>" method="post">
+                                    <!-- <form action="./phpEngine/login.php" method="post"> -->
                                         <div class="row">
                                             <div class="col-lg-12 col-mb-12 mb-4 form-group">
                                                 <input type="email" name="email" id="email" class="form-control rounded-0 border" placeholder="Enter Your Email">
@@ -432,13 +477,32 @@
                                         </div>
                                     </form>
                                     <?php
-
-                                        
-
-
-
+                                        if(isset($_REQUEST["email"])){
+                                            $email = $_REQUEST["email"];
+                                            $password = $_REQUEST["password"];
+                                            $valsql = "SELECT * FROM users WHERE email = '{$email}' AND password = '{$password}'";
+                                            $valresult = mysqli_query( $conn , $valsql);
+                                            if(mysqli_num_rows($valresult) > 0){
+                                                while ($valrow = mysqli_fetch_assoc($valresult)){
+                                                    // print_r($valrow);
+                                                    $_SESSION["id"] = $valrow["id"];
+                                                    $_SESSION["name"] = $valrow["name"];
+                                                    $_SESSION["password"]= $valrow["password"];
+                                                    $_SESSION["role"] = $valrow["role"];
+                                                    echo "<script>window.location.href='http://localhost/shion-house/'</script>";
+                                                }
+                                            }else{
+                                        ?>
+                                                <div class="alert alert-danger mt-4 alert_box ">Incorrect Password</div>
+                                        <?php
+                                            }
+                                        }
                                     ?>
                                 </div>
+                                <?php
+                                    }
+                                ?>
+                                
                             </div>
                         </div>
                     </div>
