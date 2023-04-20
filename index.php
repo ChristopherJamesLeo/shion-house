@@ -444,6 +444,40 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr/>
+                            <?php
+                                if(isset($_SESSION["id"])){
+                                    if($_SESSION["role"] == "1"){
+                            ?>
+                                <div class="mb-4 add_product_box">
+                                    <div class=" row">
+                                        <div class="col-12">
+                                            <form action="./phpEngine/addproduct.php" class="" method="POST" enctype="multipart/form-data">
+                                                <div class="mb-3 form-group ">
+                                                    <input type="file" name="pro_img" id="pro_img" class="form-control rounded-0 border">
+                                                </div>
+                                                <div class="mb-3 form-group ">
+                                                    <input type="text" name="name" id="name" class="form-control rounded-0 border" placeholder="Product Name">
+                                                </div>
+                                                <div class="mb-3 form-group ">
+                                                    <input type="text" name="type" id="type" class="form-control rounded-0 border" placeholder="Product Type">
+                                                </div>
+                                                <div class="mb-3 form-group ">
+                                                    <input type="text" name="price" id="price" class="form-control rounded-0 border" placeholder="Product Price">
+                                                </div>
+                                                <div class="d-grid">
+                                                    <button type="submit" class="btn rounded-0 text-uppercase">submit</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                            <?php
+                                    }
+                                }
+                            ?>
+                                
                                 <?php
                                 if(isset($_SESSION["id"])){
                                 ?>
